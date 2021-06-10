@@ -2,28 +2,52 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Belly Button Biodiversity Graphs</title>
-  <link rel="stylesheet" href="bootstrap_LUX.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Belly Button Biodiversity Graphs</title>
+    <link rel="stylesheet" href="bootstrap_LUX.css">
 </head>
 
 <body>
     <div class="jumbotron text-center" style="padding: 75px!important">
         <div class="container">
             <h1>Belly Button Biodiversity Data</h1>
-            <h4>See the interactive chart below for details on the data</h4>
+            <h4>See the interactive charts below for details on the data</h4>
         </div>
     </div>
-  
 
-  <script src="https://d3js.org/d3.v5.min.js"></script>
-  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-  <script src="./static/js/app.js"></script>
-  <script src="./static/js/bonus.js"></script>
-  <script src="samples.json"></script>
-  
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="row">
+                    <h6>dropdown selector</h6>
+                </div>
+                <div class="row">
+                    <h6>demographics data</h6>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <h6>horizontal bar chart</h6>
+            </div>
+            <div class="col-md-4">
+                <h6>gauge chart</h6>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <h6>bubble chart</h6>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="./static/js/app.js"></script>
+    <script src="./static/js/bonus.js"></script>
+    <script src="samples.json"></script>
+
 </body>
 
 </html>
