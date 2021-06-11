@@ -16,20 +16,15 @@ d3.json("samples.json").then((samples) => {
     
     select.on('change', function() {
         var selected_id = select.property('value');
-        console.log(selected_id);
         var spec_sample = samples.samples[selected_id];
-        console.log(spec_sample);
-        var sample_values = spec_sample.sample_values.slice(0,10).reverse();
-        console.log(sample_values);
-        var otu_ids = spec_sample.otu_ids.slice(0,10).reverse();
-        console.log(otu_ids);
-        var otu_labels = spec_sample.otu_labels.slice(0,10).reverse();
-        console.log(otu_labels);
+        var sample_values_10 = spec_sample.sample_values.slice(0,10).reverse();
+        var otu_ids_10 = spec_sample.otu_ids.slice(0,10).reverse();
+        var otu_labels_10 = spec_sample.otu_labels.slice(0,10).reverse();
 
         var trace1 = {
-            x: sample_values,
-            y: otu_ids,
-            text: otu_labels,
+            x: sample_values_10,
+            y: otu_ids_10,
+            text: otu_labels_10,
             type: "bar",
             orientation: "h"
         };
