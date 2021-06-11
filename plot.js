@@ -2,7 +2,7 @@ var select = d3.select("#id-select")
 
 // pull json data in 
 d3.json("samples.json").then((samples) => {
-    //set up variables from samples
+    //set up drop down from ID names
     var IDS = samples.names;
 
     count = 0
@@ -13,13 +13,15 @@ d3.json("samples.json").then((samples) => {
         option.property('value', count)
         count = count + 1
     })
-    
-    select.on('change', function() {
+
+    //when an ID is selected show graphs
+    select.on('change', function () {
+        //hbar graph
         var selected_id = select.property('value');
         var spec_sample = samples.samples[selected_id];
-        var sample_values_10 = spec_sample.sample_values.slice(0,10).reverse();
-        var otu_ids_10 = spec_sample.otu_ids.slice(0,10).reverse();
-        var otu_labels_10 = spec_sample.otu_labels.slice(0,10).reverse();
+        var sample_values_10 = spec_sample.sample_values.slice(0, 10).reverse();
+        var otu_ids_10 = spec_sample.otu_ids.slice(0, 10).reverse();
+        var otu_labels_10 = spec_sample.otu_labels.slice(0, 10).reverse();
 
         var trace1 = {
             x: sample_values_10,
@@ -33,13 +35,36 @@ d3.json("samples.json").then((samples) => {
 
         var layout1 = {
             title: "Top 10 Bacterial Cultures Found",
-            yaxis: {type : "category", title: "OTU ID"}, 
-            xaxis: {title: "Count of each ID"}
+            yaxis: { type: "category", title: "OTU ID" },
+            xaxis: { title: "Count of each ID" }
         };
-        
+
         Plotly.newPlot('hbar', data1, layout1);
 
+        //bubble graph
+        var sample_values = spec_sample.sample_values;
+        var otu_ids = spec_sample.otu_ids;
+        var otu_labels = spec_sample.otu_labels;
+
+        var trace2 = {
+            x: otu_ids,
+            y: sample_values,
+            mode: 'markers',
+            marker: {
+                size: sample_values
+            },
+            text: otu_labels
+        };
+        var data2 = [trace2];
+
+        var layout2 = {
+            title: "Bacterial Cultures per Sample",
+            xaxis: {title: "OTU ID" },
+            yaxis: { title: "Count of each ID" }
+        };
+
+        Plotly.newPlot('bubble-chart', data2, layout2);
+
     })
-    
-  });
-  
+
+});
