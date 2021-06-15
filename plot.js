@@ -46,12 +46,28 @@ d3.json("samples.json").then((samples) => {
         var otu_ids = spec_sample.otu_ids;
         var otu_labels = spec_sample.otu_labels;
 
+        //turning the otu_ids values into something the RGB function can use
+        rgb_math = x => x / 3500 * 128;
+        var num_color = otu_ids.map(rgb_math);
+
+        rgb_series = x => 'rgb(' + 1/x + ',' + x*2 + ',' + 150 +')';
+        var num_colors = num_color.map(rgb_series);
+
+        size_mod = x => x / Math.sqrt((Math.sqrt(x)));
+        var size_value = sample_values.map(size_mod);
+
+        console.log(otu_ids);
+        console.log(num_color);
+        console.log(num_colors);
+        console.log(size_value);
+
         var trace2 = {
             x: otu_ids,
             y: sample_values,
             mode: 'markers',
             marker: {
-                size: sample_values
+                size: size_value,
+                color: num_colors
             },
             text: otu_labels
         };
