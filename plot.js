@@ -77,6 +77,14 @@ d3.json("samples.json").then((samples) => {
 
         Plotly.newPlot('bubble-chart', data2, layout2);
 
+        //demographics data list
+        var spec_metadata = samples.metadata[selected_id];
+        var meta_id = spec_metadata.id;
+
+        //push the data onto the webpage
+        d3.select("#item1").text(`ID: ${meta_id}`);
+
+
     })
 
 });
