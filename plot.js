@@ -58,7 +58,7 @@ d3.json("samples.json").then((samples) => {
         rgb_math = x => x / 3500 * 128;
         var num_color = otu_ids.map(rgb_math);
         //making rgb series
-        rgb_series = x => 'rgb(' + 1/x + ',' + x*2 + ',' + 150 +')';
+        rgb_series = x => 'rgb(' + 1 / x + ',' + x * 2 + ',' + 150 + ')';
         var num_colors = num_color.map(rgb_series);
 
         //modifying the size so that the dots don't overlap as much 
@@ -83,7 +83,7 @@ d3.json("samples.json").then((samples) => {
         //bubble layout
         var layout2 = {
             title: "Bacterial Cultures per Sample",
-            xaxis: {title: "OTU ID" },
+            xaxis: { title: "OTU ID" },
             yaxis: { title: "Count of each ID" }
         };
 
@@ -107,6 +107,44 @@ d3.json("samples.json").then((samples) => {
         d3.select("#item5").text(`Location: ${meta_location}`);
         d3.select("#item6").text(`Belly Button Type: ${meta_bbtype}`);
         d3.select("#item7").text(`Wash Frequency: ${meta_wfreq}`);
+
+        //gauge graph
+        //gauge trace
+        var trace3 =
+        {
+            type: "indicator",
+            mode: "gauge+number",
+            value: meta_wfreq,
+            gauge: {
+                axis: { range: [null, 9] },
+                bar: { color: "darkgreen" },
+                bgcolor: "white",
+                borderwidth: 2,
+                bordercolor: "gray",
+                steps: [
+                    { range: [0, 1], color: "rgb(225, 245, 238)" },
+                    { range: [1, 2], color: "rgb(200, 245, 238)" },
+                    { range: [2, 3], color: "rgb(175, 245, 238)" },
+                    { range: [3, 4], color: "rgb(150, 245, 238)" },
+                    { range: [4, 5], color: "rgb(125, 245, 238)" },
+                    { range: [5, 6], color: "rgb(100, 245, 238)" },
+                    { range: [6, 7], color: "rgb(75, 245, 238)" },
+                    { range: [7, 8], color: "rgb(50, 245, 238)" },
+                    { range: [8, 9], color: "rgb(25, 245, 238)" },
+                ],
+            }
+        };
+
+        //gauge data
+        var data3 = [trace3];
+
+        //gauge layout
+        var layout3 = {
+            title: "Belly Button Wash Frequency"
+        };
+
+        //gauge plot
+        Plotly.newPlot('gauge-chart', data3, layout3);
 
     })
 
