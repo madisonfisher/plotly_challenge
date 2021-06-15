@@ -4,9 +4,9 @@ var select = d3.select("#id-select")
 d3.json("samples.json").then((samples) => {
     //set up drop down from ID names
     var IDS = samples.names;
-
+    //set up counter to run through for dropdown
     count = 0
-
+    //run through each ID and add it to the dropdown 
     IDS.forEach(id => {
         var option = select.append('option');
         option.text(id)
@@ -17,12 +17,16 @@ d3.json("samples.json").then((samples) => {
     //when an ID is selected show graphs
     select.on('change', function () {
         //hbar graph
+        //pulling data out of samples for hbar
         var selected_id = select.property('value');
         var spec_sample = samples.samples[selected_id];
+        //modifying the list to grab the top 10 (all IDs are already in highest to lowest sample_value order)
+        //reversing the list to make sure the hbar has the proper orientation
         var sample_values_10 = spec_sample.sample_values.slice(0, 10).reverse();
         var otu_ids_10 = spec_sample.otu_ids.slice(0, 10).reverse();
         var otu_labels_10 = spec_sample.otu_labels.slice(0, 10).reverse();
 
+        //hbar trace
         var trace1 = {
             x: sample_values_10,
             y: otu_ids_10,
@@ -31,17 +35,21 @@ d3.json("samples.json").then((samples) => {
             orientation: "h"
         };
 
+        //hbar data
         var data1 = [trace1];
 
+        //hbar layout
         var layout1 = {
             title: "Top 10 Bacterial Cultures Found",
             yaxis: { type: "category", title: "OTU ID" },
             xaxis: { title: "Count of each ID" }
         };
 
+        //hbar plot
         Plotly.newPlot('hbar', data1, layout1);
 
         //bubble graph
+        //pull in data from samples
         var sample_values = spec_sample.sample_values;
         var otu_ids = spec_sample.otu_ids;
         var otu_labels = spec_sample.otu_labels;
@@ -57,6 +65,7 @@ d3.json("samples.json").then((samples) => {
         size_mod = x => x / Math.sqrt((Math.sqrt(x)));
         var size_value = sample_values.map(size_mod);
 
+        //bubble trace
         var trace2 = {
             x: otu_ids,
             y: sample_values,
@@ -67,14 +76,18 @@ d3.json("samples.json").then((samples) => {
             },
             text: otu_labels
         };
+
+        //bubble data
         var data2 = [trace2];
 
+        //bubble layout
         var layout2 = {
             title: "Bacterial Cultures per Sample",
             xaxis: {title: "OTU ID" },
             yaxis: { title: "Count of each ID" }
         };
 
+        //bubble plot
         Plotly.newPlot('bubble-chart', data2, layout2);
 
         //demographics data list
@@ -94,7 +107,6 @@ d3.json("samples.json").then((samples) => {
         d3.select("#item5").text(`Location: ${meta_location}`);
         d3.select("#item6").text(`Belly Button Type: ${meta_bbtype}`);
         d3.select("#item7").text(`Wash Frequency: ${meta_wfreq}`);
-
 
     })
 
