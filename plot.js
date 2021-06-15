@@ -82,10 +82,18 @@ d3.json("samples.json").then((samples) => {
         var meta_id = spec_metadata.id;
         var meta_ethnicity = spec_metadata.ethnicity;
         var meta_gender = spec_metadata.gender;
+        var meta_age = spec_metadata.age;
+        var meta_location = spec_metadata.location;
+        var meta_bbtype = spec_metadata.bbtype;
+        var meta_wfreq = spec_metadata.wfreq;
         //push the data onto the webpage
         d3.select("#item1").text(`ID: ${meta_id}`);
         d3.select("#item2").text(`Ethnicity: ${meta_ethnicity}`);
         d3.select("#item3").text(`Gender: ${meta_gender}`);
+        d3.select("#item4").text(`Age: ${meta_age}`);
+        d3.select("#item5").text(`Location: ${meta_location}`);
+        d3.select("#item6").text(`Belly Button Type: ${meta_bbtype}`);
+        d3.select("#item7").text(`Wash Frequency: ${meta_wfreq}`);
 
 
     })
