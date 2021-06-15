@@ -80,9 +80,12 @@ d3.json("samples.json").then((samples) => {
         //demographics data list
         var spec_metadata = samples.metadata[selected_id];
         var meta_id = spec_metadata.id;
-
+        var meta_ethnicity = spec_metadata.ethnicity;
+        var meta_gender = spec_metadata.gender;
         //push the data onto the webpage
         d3.select("#item1").text(`ID: ${meta_id}`);
+        d3.select("#item2").text(`Ethnicity: ${meta_ethnicity}`);
+        d3.select("#item3").text(`Gender: ${meta_gender}`);
 
 
     })
